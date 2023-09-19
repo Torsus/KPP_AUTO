@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace KPP
         private void button1_Click(object sender, EventArgs e)
         {
             String Sql;
+            StreamWriter sw = new StreamWriter("KPP.txt");
             if (Datacontainer.connectsource == "Data Source=Klingen-su-db,62468; Initial Catalog = Klingen;")
             {
                 //  Sql = "SELECT ROW_NUMBER() OVER(ORDER BY[Index] Desc) AS RowNumber,[Index],[Personal number],[Familyname],[First Name] FROM[Klingen].[dbo].[Patients] WHERE[Personal number] IN(SELECT[Personal number] FROM[Klingen].[dbo].[Patients] GROUP BY[Personal number] HAVING COUNT(*) > 1)";
@@ -43,13 +45,95 @@ namespace KPP
             while (reader.Read())
             {
 
-                Datacontainer.Index = (int)reader.GetValue(0);
-                Datacontainer.FilKod = (String)reader.GetValue(2);
-                //Datacontainer.Familyname = (String)reader.GetValue(3);
+            //    Datacontainer.Index = (int)reader.GetValue(0);
+                Datacontainer.FilKod = (String)reader.GetValue(0);
+                Datacontainer.outputstring = Datacontainer.FilKod;
+                Datacontainer.outputstring += ",";
+                Datacontainer.PostID = (String)reader.GetValue(1);
+                Datacontainer.outputstring += Datacontainer.PostID;
+                Datacontainer.outputstring += ",";
+                Datacontainer.RapportDatum = (String)reader.GetValue(2);
+                Datacontainer.outputstring += Datacontainer.RapportDatum;
+                Datacontainer.outputstring += ",";
+              //  Datacontainer.saljare = (String)reader.GetValue(3);
+                Datacontainer.outputstring += (String)reader.GetValue(3);
+                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += (String)reader.GetValue(4);
+                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += (String)reader.GetValue(5);
+                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += (String)reader.GetValue(6);
+                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += (String)reader.GetValue(7);
+                Datacontainer.outputstring += ",";
+                if (reader.GetValue(8) !=  DBNull.Value)
+                {
+                    Datacontainer.outputstring += (String)reader.GetValue(8);
+                    Datacontainer.outputstring += ",";
+                }
+                else
+                {
+                    Datacontainer.outputstring += ",";
+                }
+                Datacontainer.outputstring += (String)reader.GetValue(9);
+                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += (String)reader.GetValue(10);
+                Datacontainer.outputstring += ",";
+                if (reader.GetValue(11) != DBNull.Value)
+                {
+                    Datacontainer.outputstring += (String)reader.GetValue(11);
+                    Datacontainer.outputstring += ",";
+                }
+                else
+                {
+                    Datacontainer.outputstring += ",";
+                }
+                if (reader.GetValue(12) != DBNull.Value)
+                {
+                    Datacontainer.outputstring += (int)reader.GetValue(12);
+                    Datacontainer.outputstring += ",";
+                }
+                else
+                {
+                    Datacontainer.outputstring += ",";
+                }
+                Datacontainer.outputstring += (String)reader.GetValue(13);
+                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += (String)reader.GetValue(14);
+                Datacontainer.outputstring += ",";
+                if (reader.GetValue(15) != DBNull.Value)
+                {
+                    Datacontainer.outputstring += (String)reader.GetValue(15);
+                    Datacontainer.outputstring += ",";
+                }
+                else
+                {
+                    Datacontainer.outputstring += ",";
+                }
+                Datacontainer.outputstring += (String)reader.GetValue(16);
+                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += (String)reader.GetValue(17);
+                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += (String)reader.GetValue(18);
+              //  Datacontainer.outputstring += ",";
+                sw.WriteLine(Datacontainer.outputstring);
                
             }
 
             reader.Close();
+            sw.Close();
+            string message = "Utläsning klart !";
+            string title = "";
+            MessageBoxButtons buttons = MessageBoxButtons.OK;
+            DialogResult result = MessageBox.Show(message, title, buttons);
+            if (result == DialogResult.OK)
+            {
+                button2.Enabled = true;
+            }
+            else
+            {
+                // Do something
+            }
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)

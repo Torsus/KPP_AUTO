@@ -14,6 +14,10 @@ namespace KPP
         public static string anvandarnamn;
         public static string losen;
         public static string FilKod;
+        public static string PostID;
+        public static string RapportDatum;
+        public static string outputstring;
+      //  public static string saljare;
         public static SqlConnection cnn;
         public static SqlCommand command, command2;
         public static int Index;
