@@ -23,7 +23,29 @@ namespace KPP
         private void button1_Click(object sender, EventArgs e)
         {
             String Sql;
-            StreamWriter sw = new StreamWriter("KPP_PRODUKTIONSDATABAS.txt");
+            //    StreamWriter sw = new StreamWriter("KPP_PRODUKTIONSDATABASEN.txt");
+            string year = DateTime.Parse(DateTime.Now.ToString()).Year.ToString();
+            string tmpmonth = DateTime.Parse(DateTime.Now.ToString()).Month.ToString();
+            string month;
+            if (tmpmonth == "1" || tmpmonth == "2" || tmpmonth == "3" || tmpmonth == "4" || tmpmonth == "5" || tmpmonth == "6" || tmpmonth == "7" || tmpmonth == "8" || tmpmonth == "9")
+            {
+                month = "0" + tmpmonth;
+            }
+            else
+            {
+                month = tmpmonth;
+            }
+            string tmpday = DateTime.Parse(DateTime.Now.ToString()).Day.ToString();
+            string day;
+            if (tmpday == "1" || tmpday == "2" || tmpday == "3" || tmpday == "4" || tmpday == "5" || tmpday == "6" || tmpday == "7" || tmpday == "8" || tmpday == "9")
+            {
+                day = "0" + tmpday;
+            }
+            else
+            {
+                day = tmpday;
+            }
+            StreamWriter sw = new StreamWriter("SU" + year + month + "ADB_Genetiklab2258" + year + month + day + ".txt");
             if (Datacontainer.connectsource == "Data Source=Klingen-su-db,62468; Initial Catalog = Klingen;")
             {
                 //  Sql = "SELECT ROW_NUMBER() OVER(ORDER BY[Index] Desc) AS RowNumber,[Index],[Personal number],[Familyname],[First Name] FROM[Klingen].[dbo].[Patients] WHERE[Personal number] IN(SELECT[Personal number] FROM[Klingen].[dbo].[Patients] GROUP BY[Personal number] HAVING COUNT(*) > 1)";
@@ -61,7 +83,10 @@ namespace KPP
                 Datacontainer.outputstring += ",";
                 Datacontainer.outputstring += (String)reader.GetValue(4);
                 Datacontainer.outputstring += ",";
-                Datacontainer.outputstring += (String)reader.GetValue(5);
+                //  Datacontainer.outputstring += (String)reader.GetValue(5);
+                Datacontainer.personnummer = (String)reader.GetValue(5);
+                Datacontainer.personnummer = Datacontainer.personnummer.Substring(2);
+                Datacontainer.outputstring += Datacontainer.personnummer;
                 Datacontainer.outputstring += ",";
                 Datacontainer.outputstring += (String)reader.GetValue(6);
                 Datacontainer.outputstring += ",";
@@ -123,7 +148,33 @@ namespace KPP
 
             reader.Close();
             sw.Close();
-            FileInfo file = new FileInfo("KPP_PRODUKTIONSDATABAS.txt");
+           
+            ///Extract date
+           // DateTime dt = DateTime.Now;
+           // string datum = dt.ToString();
+           // string year = datum.
+            //string year = DateTime.Parse(DateTime.Now.ToString()).Year.ToString();
+            //string tmpmonth = DateTime.Parse(DateTime.Now.ToString()).Month.ToString();
+            //string month;
+            //if (tmpmonth == "1" || tmpmonth == "2" || tmpmonth == "3" || tmpmonth == "4" || tmpmonth == "5" || tmpmonth == "6" || tmpmonth == "7" || tmpmonth == "8" || tmpmonth == "9")
+            //{
+            //    month = "0" + tmpmonth;
+            //}
+            //else
+            //{
+            //    month = tmpmonth;
+            //}
+            //string tmpday = DateTime.Parse(DateTime.Now.ToString()).Day.ToString();
+            //string day;
+            //if(tmpday == "1" || tmpday == "2" || tmpday == "3" || tmpday == "4" || tmpday == "5" || tmpday == "6" || tmpday == "7" || tmpday == "8" || tmpday == "9")
+            //{
+            //    day = "0" + tmpday;
+            //}
+            //else
+            //{
+            //    day = tmpday;
+            //}
+            FileInfo file = new FileInfo("SU" + year + month + "ADB_Genetiklab2258" + year + month + day + ".txt");
             if (Datacontainer.connectsource == "Data Source=Klingen-test-su-db,62468; Initial Catalog = Klingen_Test;")
             {
                 file.MoveTo("KPP_TESTDATABAS.txt");

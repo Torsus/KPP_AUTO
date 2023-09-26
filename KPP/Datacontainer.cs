@@ -12,6 +12,7 @@ namespace KPP
         public static string connectionString;
         public static string connectsource;
         public static string anvandarnamn;
+        public static string personnummer;
         public static string losen;
         public static string FilKod;
         public static string PostID;
