@@ -71,77 +71,77 @@ namespace KPP
             //    Datacontainer.Index = (int)reader.GetValue(0);
                 Datacontainer.FilKod = (String)reader.GetValue(0);
                 Datacontainer.outputstring = Datacontainer.FilKod;
-                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += ";";
                 Datacontainer.PostID = (String)reader.GetValue(1);
                 Datacontainer.outputstring += Datacontainer.PostID;
-                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += ";";
                 Datacontainer.RapportDatum = (String)reader.GetValue(2);
                 Datacontainer.outputstring += Datacontainer.RapportDatum;
-                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += ";";
               //  Datacontainer.saljare = (String)reader.GetValue(3);
                 Datacontainer.outputstring += (String)reader.GetValue(3);
-                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += ";";
                 Datacontainer.outputstring += (String)reader.GetValue(4);
-                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += ";";
                 //  Datacontainer.outputstring += (String)reader.GetValue(5);
                 Datacontainer.personnummer = (String)reader.GetValue(5);
                 Datacontainer.personnummer = Datacontainer.personnummer.Substring(2);
                 Datacontainer.outputstring += Datacontainer.personnummer;
-                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += ";";
                 Datacontainer.outputstring += (String)reader.GetValue(6);
-                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += ";";
                 Datacontainer.outputstring += (String)reader.GetValue(7);
-                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += ";";
                 if (reader.GetValue(8) !=  DBNull.Value)
                 {
                     Datacontainer.outputstring += (String)reader.GetValue(8);
-                    Datacontainer.outputstring += ",";
+                    Datacontainer.outputstring += ";";
                 }
                 else
                 {
-                    Datacontainer.outputstring += ",";
+                    Datacontainer.outputstring += ";";
                 }
                 Datacontainer.outputstring += (String)reader.GetValue(9);
-                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += ";";
                 Datacontainer.outputstring += (String)reader.GetValue(10);
-                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += ";";
                 if (reader.GetValue(11) != DBNull.Value)
                 {
                     Datacontainer.outputstring += (String)reader.GetValue(11);
-                    Datacontainer.outputstring += ",";
+                    Datacontainer.outputstring += ";";
                 }
                 else
                 {
-                    Datacontainer.outputstring += ",";
+                    Datacontainer.outputstring += ";";
                 }
                 if (reader.GetValue(12) != DBNull.Value)
                 {
                     Datacontainer.outputstring += (int)reader.GetValue(12);
-                    Datacontainer.outputstring += ",";
+                    Datacontainer.outputstring += ";";
                 }
                 else
                 {
-                    Datacontainer.outputstring += ",";
+                    Datacontainer.outputstring += ";";
                 }
                 Datacontainer.outputstring += (String)reader.GetValue(13);
-                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += ";";
                 Datacontainer.outputstring += (String)reader.GetValue(14);
-                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += ";";
                 if (reader.GetValue(15) != DBNull.Value)
                 {
                     Datacontainer.outputstring += (String)reader.GetValue(15);
-                    Datacontainer.outputstring += ",";
+                    Datacontainer.outputstring += ";";
                 }
                 else
                 {
-                    Datacontainer.outputstring += ",";
+                    Datacontainer.outputstring += ";";
                 }
                 Datacontainer.outputstring += (String)reader.GetValue(16);
-                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += ";";
                 Datacontainer.outputstring += (String)reader.GetValue(17);
-                Datacontainer.outputstring += ",";
+                Datacontainer.outputstring += ";";
                 Datacontainer.outputstring += (String)reader.GetValue(18);
-              //  Datacontainer.outputstring += ",";
+              //  Datacontainer.outputstring += ";";
                 sw.WriteLine(Datacontainer.outputstring);
                
             }
