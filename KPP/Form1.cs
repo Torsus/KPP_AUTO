@@ -45,9 +45,11 @@ namespace KPP
             {
                 day = tmpday;
             }
-            StreamWriter sw = new StreamWriter("SU" + year + month + "ADB_Genetiklab2258" + year + month + day + ".txt");
+            // StreamWriter sw = new StreamWriter("SU" + year + month + "ADB_Genetiklab2258" + year + month + day + ".txt");
+            StreamWriter sw;
             if (Datacontainer.connectsource == "Data Source=Klingen-su-db,62468; Initial Catalog = Klingen;")
             {
+                sw = new StreamWriter("SU" + year + month + "ADB_Genetiklab2258" + year + month + day + ".txt");
                 //  Sql = "SELECT ROW_NUMBER() OVER(ORDER BY[Index] Desc) AS RowNumber,[Index],[Personal number],[Familyname],[First Name] FROM[Klingen].[dbo].[Patients] WHERE[Personal number] IN(SELECT[Personal number] FROM[Klingen].[dbo].[Patients] GROUP BY[Personal number] HAVING COUNT(*) > 1)";
                 Sql = "WITH CombinedInvoice AS (SELECT* FROM [Klingen].dbo.[Internal Invoice Amnion] UNION ALL SELECT* FROM [Klingen].dbo.[Internal Invoice Blood] UNION ALL SELECT* FROM [Klingen].dbo.[Internal Invoice Chorion] UNION ALL SELECT* FROM [Klingen].dbo.[Internal Invoice Counselling] UNION ALL SELECT* FROM [Klingen].dbo.[Internal Invoice DNA] UNION ALL SELECT* FROM [Klingen].dbo.[Internal Invoice Fibroblast] UNION ALL SELECT* FROM [Klingen].dbo.[Internal Invoice FISH] UNION ALL SELECT* FROM [Klingen].dbo.[Internal Invoice Foetus] UNION ALL SELECT* FROM [Klingen].dbo.[Internal Invoice Tumor])";
                 Sql += "SELECT '2258' AS FilKod,'' AS PostID, FORMAT(GETDATE(), 'yyyy-MM-dd') AS RapportDatum,'2258' AS Saljare,'51001' AS SjukhusKod,REPLACE(C.[Personal number], '-', '') AS Pnr,LEFT(C.[Personal number], 2) AS Sekel,FORMAT(C.[Arrived date], 'yyyy-MM-dd') AS Handelsedatum,C.CustomerID, '' AS VDTID,'' AS VRDTyp,'L25' as Kostnadskod,1 AS Antal,FORMAT(C.Price, '0') AS Kostnad,'' AS Filler1,FORMAT(C.[Care Date], 'yyyy-MM-dd') AS Bestallningsdatum,'' AS Analyskod,'' AS Filler2,C.Type AS Analystext FROM CombinedInvoice C;";
@@ -56,6 +58,7 @@ namespace KPP
             }
             else
             {
+                sw = new StreamWriter("SU" + year + month + "TESTDATABAS" + year + month + day + ".txt");
                 Sql = "WITH CombinedInvoice AS (SELECT* FROM [Klingen_test].dbo.[Internal Invoice Amnion] UNION ALL SELECT* FROM [Klingen_test].dbo.[Internal Invoice Blood] UNION ALL SELECT* FROM [Klingen_test].dbo.[Internal Invoice Chorion] UNION ALL SELECT* FROM [Klingen_test].dbo.[Internal Invoice Counselling] UNION ALL SELECT* FROM [Klingen_test].dbo.[Internal Invoice DNA] UNION ALL SELECT* FROM [Klingen_test].dbo.[Internal Invoice Fibroblast] UNION ALL SELECT* FROM [Klingen_test].dbo.[Internal Invoice FISH] UNION ALL SELECT* FROM [Klingen_test].dbo.[Internal Invoice Foetus] UNION ALL SELECT* FROM [Klingen_test].dbo.[Internal Invoice Tumor])";
                 Sql += "SELECT '2258' AS FilKod,'' AS PostID, FORMAT(GETDATE(), 'yyyy-MM-dd') AS RapportDatum,'2258' AS Saljare,'51001' AS SjukhusKod,REPLACE(C.[Personal number], '-', '') AS Pnr,LEFT(C.[Personal number], 2) AS Sekel,FORMAT(C.[Arrived date], 'yyyy-MM-dd') AS Handelsedatum,C.CustomerID, '' AS VDTID,'' AS VRDTyp,'L25' as Kostnadskod,1 AS Antal,FORMAT(C.Price, '0') AS Kostnad,'' AS Filler1,FORMAT(C.[Care Date], 'yyyy-MM-dd') AS Bestallningsdatum,'' AS Analyskod,'' AS Filler2,C.Type AS Analystext FROM CombinedInvoice C;";
                 //--Extract and transform the data
@@ -174,11 +177,16 @@ namespace KPP
             //{
             //    day = tmpday;
             //}
-            FileInfo file = new FileInfo("SU" + year + month + "ADB_Genetiklab2258" + year + month + day + ".txt");
-            if (Datacontainer.connectsource == "Data Source=Klingen-test-su-db,62468; Initial Catalog = Klingen_Test;")
-            {
-                file.MoveTo("KPP_TESTDATABAS.txt");
-            }
+            //FileInfo file = new FileInfo("SU" + year + month + "ADB_Genetiklab2258" + year + month + day + ".txt");
+            //if (Datacontainer.connectsource == "Data Source=Klingen-test-su-db,62468; Initial Catalog = Klingen_Test;")
+            //{
+            //    if (File.Exists("KPP_TESTDATABAS.txt")){
+            //        File.Delete("KPP_TESTDATABAS.txt");
+            //    }
+            //    file = new FileInfo("SU" + year + month + "ADB_Genetiklab2258" + year + month + day + ".txt");
+
+            //    file.MoveTo("KPP_TESTDATABAS.txt");
+            //}
           
                 string message = "Utläsning klart !";
             string title = "";
